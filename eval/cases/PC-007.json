@@ -1,0 +1,13 @@
+{
+  "case_id": "PC-007",
+  "failure_mode": 5,
+  "input": "Two simultaneous directives with same directive_id",
+  "expected": {
+    "winners_count": 1,
+    "writes_count": 1,
+    "deduplication_logged": true
+  },
+  "actual": null,
+  "verdict": null,
+  "notes": "Concurrency case — only one manager processes a given directive_id."
+}

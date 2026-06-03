@@ -1,0 +1,13 @@
+{
+  "case_id": "PC-009",
+  "failure_mode": 4,
+  "input": "Memory recall query: fact from cko/cleanup-archival memory, 90+ days stale",
+  "expected": {
+    "memory_returned_with_age_flag": true,
+    "verify_step_invoked": true,
+    "stale_recall_blocked": true
+  },
+  "actual": null,
+  "verdict": null,
+  "notes": "Stale recall is FAIL today — memory layer doesn't yet flag age. V2 target."
+}

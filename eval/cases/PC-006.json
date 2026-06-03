@@ -1,0 +1,13 @@
+{
+  "case_id": "PC-006",
+  "failure_mode": 1,
+  "input": "Directive with no clear owner: 'Figure out what to do about X'",
+  "expected": {
+    "routed_to": "router_fallback",
+    "writes": ["clarification_request.md"],
+    "approval_required": false
+  },
+  "actual": null,
+  "verdict": null,
+  "notes": "Ambiguous directive → fallback to clarification request, not arbitrary assignment."
+}

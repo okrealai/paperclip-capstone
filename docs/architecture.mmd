@@ -1,0 +1,106 @@
+---
+config:
+  layout: elk
+---
+flowchart TB
+
+  subgraph LEGEND["Legend — classDef status convention"]
+    direction LR
+    L_verified([VERIFIED — heartbeat + audit pass]):::verified
+    L_live([LIVE — production, default-operational]):::live
+    L_partial([PARTIAL — scaffolded, no telemetry yet]):::partial
+    L_dormant([DORMANT — HEARTBEAT green, work stopped]):::unstable
+    L_missing([MISSING — proposed, not built]):::missing
+    L_external([EXTERNAL — third-party APIs]):::external
+  end
+
+  subgraph L1["①  INPUT — Directive intake"]
+    direction TB
+    OPERATOR([Operator prompt])
+    CRON([Scheduled cron])
+    WEBHOOK([External webhook])
+  end
+
+  subgraph L2["②  PROCESSING — Paperclip org"]
+    direction TB
+    ROUTER{"Which CXO owns this?"}
+    subgraph CXO["CXO managers (server fleet)"]
+      direction TB
+      LATTICE[lattice — CKO ops]
+      CONDUIT[conduit — CIO ops]
+      STEWARD[steward — HR / self-heal]
+      BULWARK[bulwark — CISO security]
+      APEX[apex — CEO strategy]
+      CKO_XBIZ[cko/x-biz-consistency]
+      CKO_CLEAN[cko/cleanup-archival]
+      CKO_FS[cko/filesystem-org]
+      CKO_DOC[cko/document-standards]
+      CIO_NPORTS[cio/network-ports]
+      CIO_SWEEPERS[cio sweepers x4]
+      COO_CYCLE[coo/cycle]
+      COO_SCHED[coo cron + service-health + backup]
+      CEO_FRONT[ceo — Apex front]
+      VERITAS[veritas — audit probes]
+      CISO_SEC[ciso/secrets-rotation]
+    end
+    subgraph WORKERS["Worker pool"]
+      direction TB
+      W_FORGE[Forge worker chain]
+      W_ANCHOR[Anchor worker]
+      W_STEWARD[Steward worker]
+    end
+    subgraph MEMORY["Memory + reasoning"]
+      direction TB
+      GRAPH[("Knowledge graph (~31k memories, ~55k entities)")]
+      QDRANT[(Qdrant source-of-truth)]
+      LOGS[(SQLite audit logs)]
+    end
+    MCP[MCP layer<br/>read-mostly + gated writes]
+  end
+
+  subgraph L3["③  OUTPUT — Artifacts + side effects"]
+    direction TB
+    ARTIFACT[[Markdown artifact]]
+    COMMIT[[GitHub commit]]
+    HEARTBEAT[(HEARTBEAT log)]
+    AUDIT[(Audit closure)]
+    HUBSPOT{{HubSpot CRM}}
+    N8N{{n8n workflows}}
+    NOTION{{Notion}}
+    SLACK{{Slack}}
+  end
+
+  OPERATOR & CRON & WEBHOOK --> ROUTER
+  ROUTER -->|knowledge ops| LATTICE
+  ROUTER -->|infra ops| CONDUIT
+  ROUTER -->|self-heal| STEWARD
+  ROUTER -->|security| BULWARK
+  ROUTER -->|strategy| APEX
+  ROUTER -->|x-biz consistency| CKO_XBIZ
+  LATTICE & CONDUIT --> W_FORGE
+  STEWARD --> W_STEWARD
+  BULWARK --> W_ANCHOR
+  W_FORGE & W_ANCHOR & W_STEWARD --> MCP
+  MCP --> MEMORY
+  MEMORY --> WORKERS
+  W_FORGE --> ARTIFACT & COMMIT
+  W_ANCHOR --> AUDIT
+  W_STEWARD --> HEARTBEAT
+  MCP -.->|gated, currently 0 writes| HUBSPOT & N8N & NOTION & SLACK
+
+  classDef live fill:#81c784,stroke:#1b5e20,stroke-width:2px,color:#000
+  classDef verified fill:#81c784,stroke:#1b5e20,stroke-width:3px,color:#000
+  classDef unstable fill:#ffccbc,stroke:#d84315,stroke-width:2px,color:#000
+  classDef partial fill:#fff59d,stroke:#f9a825,color:#000
+  classDef missing fill:#fff,stroke:#999,stroke-dasharray:5 5,color:#666
+  classDef external fill:#b3e5fc,stroke:#01579b,stroke-width:2px,color:#000
+
+  class LATTICE,CONDUIT,STEWARD,BULWARK,CIO_NPORTS,APEX,CKO_XBIZ verified
+  class CKO_CLEAN,CKO_FS,CKO_DOC,COO_CYCLE,CEO_FRONT,VERITAS unstable
+  class CIO_SWEEPERS,COO_SCHED live
+  class CISO_SEC missing
+  class W_FORGE,W_ANCHOR,W_STEWARD live
+  class GRAPH,QDRANT,LOGS live
+  class HUBSPOT,N8N,NOTION,SLACK external
+  class MCP live
+  class OPERATOR,CRON,WEBHOOK,ROUTER,ARTIFACT,COMMIT,HEARTBEAT,AUDIT live

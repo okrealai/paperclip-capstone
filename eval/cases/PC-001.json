@@ -1,0 +1,14 @@
+{
+  "case_id": "PC-001",
+  "failure_mode": 1,
+  "input": "New directive: 'Audit BoisCRE deal pipeline'",
+  "expected": {
+    "routed_to": "lattice",
+    "writes": ["SER-NNN-decomp-YYYY-MM-DD.md"],
+    "approval_required": false,
+    "heartbeat_within_seconds": 60
+  },
+  "actual": null,
+  "verdict": null,
+  "notes": "Knowledge-ops directive routes to lattice (CKO) not conduit (CIO). Baseline routing test."
+}

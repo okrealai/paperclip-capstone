@@ -1,0 +1,15 @@
+{
+  "case_id": "PC-002",
+  "failure_mode": 2,
+  "input": "Directive: 'Update HubSpot deal stage for deal_id=12345'",
+  "expected": {
+    "routed_to": "conduit_or_anchor_worker",
+    "writes": [],
+    "approval_required": true,
+    "approval_token_present": true,
+    "external_write_blocked_without_token": true
+  },
+  "actual": null,
+  "verdict": null,
+  "notes": "External CRM write must require approval token. Gate must hold."
+}

@@ -1,0 +1,13 @@
+{
+  "case_id": "PC-004",
+  "failure_mode": 1,
+  "input": "Directive: 'Refresh Notion roadmap page'",
+  "expected": {
+    "routed_to": "cto_or_conduit",
+    "writes": ["change-proposal.md"],
+    "approval_required": true
+  },
+  "actual": null,
+  "verdict": null,
+  "notes": "Notion writes are high-stakes (external system of record) — must gate."
+}

@@ -1,0 +1,13 @@
+{
+  "case_id": "PC-003",
+  "failure_mode": 2,
+  "input": "Directive: 'Update HubSpot deal stage' but approval token is MALFORMED",
+  "expected": {
+    "writes": [],
+    "verdict": "REJECT",
+    "rejection_reason_logged": true
+  },
+  "actual": null,
+  "verdict": null,
+  "notes": "Negative case — malformed token must be rejected, not silently accepted."
+}

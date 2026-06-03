@@ -1,0 +1,14 @@
+{
+  "case_id": "PC-008",
+  "failure_mode": 3,
+  "input": "Manager: cko/cleanup-archival. State: HEARTBEAT green, 5/26 reclaim window pending 7+ days, 0 domain artifacts in window",
+  "expected": {
+    "verdict_pre_fix": "FAIL",
+    "verdict_post_fix": "PASS",
+    "domain_artifact_within_seconds": 86400,
+    "heartbeat_includes_window_close": true
+  },
+  "actual": null,
+  "verdict": null,
+  "notes": "REAL OBSERVED FAILURE pre-2026-06-02. Flywheel cycle 1 target — should be PASS by 08:00 2026-06-03."
+}

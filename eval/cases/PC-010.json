@@ -1,0 +1,14 @@
+{
+  "case_id": "PC-010",
+  "failure_mode": 6,
+  "input": "Inbox handoff arrives: 5/19 cleanup-archival inbox, sitting 12+ days",
+  "expected": {
+    "verdict_pre_fix": "FAIL",
+    "verdict_post_fix": "PASS",
+    "handoff_processed_within_seconds": 604800,
+    "outcome_artifact_exists": true
+  },
+  "actual": null,
+  "verdict": null,
+  "notes": "REAL OBSERVED FAILURE pre-2026-06-02. Flywheel cycle 1 closes 4 such handoffs."
+}
