@@ -18,6 +18,8 @@ audit→fix→re-audit cycle starts from named, reusable cases instead of from z
   few-shot / output format).
 - **`results/latest.json`** — last runner output. **`results/cycle-1.md`** — the before/after record
   for the first flywheel cycle (23% → 37%).
+- **`labeling/`** — judge-calibration kit: `to-label.jsonl` (24 real verdict items awaiting human
+  PASS/FAIL labels) + `calibrate.py` (TPR/TNR confusion matrix + the ≥80% gate). See `labeling/README.md`.
 
 ## Running it
 ```bash
@@ -45,6 +47,8 @@ state, not a gap to paper over.
 what exists.** The available verdicts are agent-generated (the scaffold-audit instrument) — and the eval
 discipline forbids LLM-generated data as ground truth (calibrating one LLM judge with another's verdicts is
 circular). A real calibration set requires a human to hand-label a batch of (output → PASS/FAIL) judgments.
+→ That batch is **scaffolded and ready** in **`labeling/`**: fill the 24-item `labeling/to-label.jsonl`
+(real, sanitized verdicts) and run `labeling/calibrate.py` for the confusion matrix + the ≥80% TPR/TNR gate.
 
 ## Ground-truth discipline
 Cases are grounded in **observed** failures where possible (dormancy, stale handoffs, mis-routing). Some are
