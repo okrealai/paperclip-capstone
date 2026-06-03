@@ -47,7 +47,7 @@
         {
           "key": "routed_to",
           "ok": true,
-          "detail": "routed_to: got 'conduit', allowed ['conduit', 'anchor_worker']"
+          "detail": "routed_to: got 'boiscre-coo', allowed ['boiscre-coo']"
         },
         {
           "key": "writes",

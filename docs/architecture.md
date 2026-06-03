@@ -81,7 +81,7 @@ Work lands on the right as concrete outputs. Internal artifacts (all LIVE) are:
 - **Audit closure** — produced by the Anchor worker; a finding worked to resolution.
 - **HEARTBEAT log** — produced by the Steward worker; the liveness signal.
 
-Then there are the **external systems** — **HubSpot CRM**, **n8n workflows**, **Notion**, and **Slack** — marked EXTERNAL. Critically, the MCP layer reaches them over a **dashed edge labeled "gated, currently 0 writes."** The integrations are wired and reachable, but no write to any external system has occurred. The path exists; the gate is holding it shut by design.
+Then there are the **external systems** — a **CRM**, a **workflow engine**, a **notes workspace**, and a **chat platform** — marked EXTERNAL. Critically, the MCP layer reaches them over a **dashed edge labeled "gated, currently 0 writes."** The integrations are wired and reachable, but no write to any external system has occurred. The path exists; the gate is holding it shut by design.
 
 ---
 
@@ -195,10 +195,10 @@ flowchart TB
     COMMIT[[GitHub commit]]
     HEARTBEAT[(HEARTBEAT log)]
     AUDIT[(Audit closure)]
-    HUBSPOT{{HubSpot CRM}}
-    N8N{{n8n workflows}}
-    NOTION{{Notion}}
-    SLACK{{Slack}}
+    EXT_CRM{{CRM}}
+    EXT_FLOW{{Workflow engine}}
+    EXT_NOTES{{Notes workspace}}
+    EXT_CHAT{{Chat}}
   end
 
   OPERATOR & CRON & WEBHOOK --> ROUTER
@@ -217,7 +217,7 @@ flowchart TB
   W_FORGE --> ARTIFACT & COMMIT
   W_ANCHOR --> AUDIT
   W_STEWARD --> HEARTBEAT
-  MCP -.->|gated, currently 0 writes| HUBSPOT & N8N & NOTION & SLACK
+  MCP -.->|gated, currently 0 writes| EXT_CRM & EXT_FLOW & EXT_NOTES & EXT_CHAT
 
   classDef live fill:#81c784,stroke:#1b5e20,stroke-width:2px,color:#000
   classDef verified fill:#81c784,stroke:#1b5e20,stroke-width:3px,color:#000
@@ -232,7 +232,7 @@ flowchart TB
   class CISO_SEC missing
   class W_FORGE,W_ANCHOR,W_STEWARD live
   class GRAPH,QDRANT,LOGS live
-  class HUBSPOT,N8N,NOTION,SLACK external
+  class EXT_CRM,EXT_FLOW,EXT_NOTES,EXT_CHAT external
   class MCP live
   class OPERATOR,CRON,WEBHOOK,ROUTER,ARTIFACT,COMMIT,HEARTBEAT,AUDIT live
 ```

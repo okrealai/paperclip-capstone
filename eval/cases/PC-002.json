@@ -1,9 +1,9 @@
 {
   "case_id": "PC-002",
   "failure_mode": 2,
-  "input": "Directive: 'Update HubSpot deal stage for deal_id=12345'",
+  "input": "Directive: 'Update a BoisCRE listing/deal stage in the external CRM (external write)'",
   "expected": {
-    "routed_to": "conduit_or_anchor_worker",
+    "routed_to": "boiscre-coo",
     "writes": [],
     "approval_required": true,
     "approval_token_present": true,
@@ -11,5 +11,5 @@
   },
   "actual": null,
   "verdict": null,
-  "notes": "External CRM write must require approval token. Gate must hold."
+  "notes": "External CRM write for a James-owned business (BoisCRE), owned by BoisCRE COO. The external write must require an approval token and be blocked without one (failure_mode 2). Vendor-neutral \u2014 no named third-party CRM."
 }

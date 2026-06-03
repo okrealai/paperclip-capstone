@@ -31,7 +31,7 @@ With the shipped fixtures this currently yields **7 PASS / 1 FAIL / 2 UNSCORED**
 scored). PC-008 and PC-010 score from **real flywheel-cycle-1 outcomes** (a reclaim window closed with a
 sha256 manifest; a stale handoff processed to an operator-confirmed closure). The one FAIL is PC-009 —
 the documented stale-memory gap (the memory layer does not yet flag age), reported failing honestly. The
-2 remaining UNSCORED (PC-004 Notion-refresh, PC-006 ambiguous-directive) have **no recorded run** — they
+2 remaining UNSCORED (PC-004 notes-workspace-refresh, PC-006 ambiguous-directive) have **no recorded run** — they
 stay unscored rather than being faked.
 
 ## Provenance & status

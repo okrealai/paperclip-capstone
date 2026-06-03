@@ -1,7 +1,7 @@
 {
   "case_id": "PC-003",
   "failure_mode": 2,
-  "input": "Directive: 'Update HubSpot deal stage' but approval token is MALFORMED",
+  "input": "Directive: 'Update a BoisCRE listing/deal stage in the external CRM' but the approval token is MALFORMED",
   "expected": {
     "writes": [],
     "verdict": "REJECT",
@@ -9,5 +9,5 @@
   },
   "actual": null,
   "verdict": null,
-  "notes": "Negative case — malformed token must be rejected, not silently accepted."
+  "notes": "Negative case \u2014 a malformed approval token must be rejected, not silently accepted. Vendor-neutral external CRM write for a James-owned business."
 }
