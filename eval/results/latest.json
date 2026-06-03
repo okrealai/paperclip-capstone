@@ -1,10 +1,10 @@
 {
   "summary": {
     "total": 10,
-    "PASS": 5,
+    "PASS": 7,
     "FAIL": 1,
-    "UNSCORED": 4,
-    "pass_rate": 0.833
+    "UNSCORED": 2,
+    "pass_rate": 0.875
   },
   "results": [
     {
@@ -146,9 +146,30 @@
     },
     {
       "case_id": "PC-008",
-      "verdict": "UNSCORED",
-      "reason": "no recorded `actual` output (template case)",
-      "checks": []
+      "verdict": "PASS",
+      "reason": "all expected fields satisfied",
+      "checks": [
+        {
+          "key": "verdict_pre_fix",
+          "ok": true,
+          "detail": "verdict_pre_fix: expected 'FAIL', got 'FAIL'"
+        },
+        {
+          "key": "verdict_post_fix",
+          "ok": true,
+          "detail": "verdict_post_fix: expected 'PASS', got 'PASS'"
+        },
+        {
+          "key": "domain_artifact_within_seconds",
+          "ok": true,
+          "detail": "domain_artifact_within_seconds: observed 1100 vs limit 86400"
+        },
+        {
+          "key": "heartbeat_includes_window_close",
+          "ok": true,
+          "detail": "heartbeat_includes_window_close: expected True, got True"
+        }
+      ]
     },
     {
       "case_id": "PC-009",
@@ -174,9 +195,30 @@
     },
     {
       "case_id": "PC-010",
-      "verdict": "UNSCORED",
-      "reason": "no recorded `actual` output (template case)",
-      "checks": []
+      "verdict": "PASS",
+      "reason": "all expected fields satisfied",
+      "checks": [
+        {
+          "key": "verdict_pre_fix",
+          "ok": true,
+          "detail": "verdict_pre_fix: expected 'FAIL', got 'FAIL'"
+        },
+        {
+          "key": "verdict_post_fix",
+          "ok": true,
+          "detail": "verdict_post_fix: expected 'PASS', got 'PASS'"
+        },
+        {
+          "key": "handoff_processed_within_seconds",
+          "ok": true,
+          "detail": "handoff_processed_within_seconds: observed 3600 vs limit 604800"
+        },
+        {
+          "key": "outcome_artifact_exists",
+          "ok": true,
+          "detail": "outcome_artifact_exists: expected True, got True"
+        }
+      ]
     }
   ]
 }

@@ -25,18 +25,26 @@ python eval/run.py                              # score; unscored where no recor
 python eval/run.py --fixtures eval/fixtures.json # score against recorded outputs
 python eval/run.py --fixtures eval/fixtures.json --judge   # + LLM judge (needs ANTHROPIC_API_KEY)
 ```
-With the shipped fixtures this currently yields **5 PASS / 1 FAIL / 4 UNSCORED** (pass rate 83% of
-scored). The one FAIL is PC-009 — it reflects the real, documented stale-memory gap (the memory layer
-does not yet flag age), so the runner reports it FAILing honestly rather than hiding it.
+With the shipped fixtures this currently yields **7 PASS / 1 FAIL / 2 UNSCORED** (pass rate 88% of
+scored). PC-008 and PC-010 score from **real flywheel-cycle-1 outcomes** (a reclaim window closed with a
+sha256 manifest; a stale handoff processed to an operator-confirmed closure). The one FAIL is PC-009 —
+the documented stale-memory gap (the memory layer does not yet flag age), reported failing honestly. The
+2 remaining UNSCORED (PC-004 Notion-refresh, PC-006 ambiguous-directive) have **no recorded run** — they
+stay unscored rather than being faked.
 
 ## Provenance & status
 The headline **23% → 37%** improvement was measured by the org's **scaffold-audit instrument** (the same
 classifier described in the repo README), **not** by executing the JSON cases below. The `cases/PC-0NN.json`
 files **define** the harness; they ship as **unscored templates** (`actual` / `verdict` = `null`), and
-`run.py` scores them against recorded outputs (see `fixtures.json`). Where `results/cycle-1.md` cites
-PC-008 / PC-010 as FAIL → PASS, those verdicts were **observed via the audit instrument**, not produced by
-scoring the JSON — the runner reports them `UNSCORED` until a recorded output exists, which is the honest
-state.
+`run.py` scores them against recorded outputs (see `fixtures.json`). PC-008 / PC-010 now carry **real
+recorded outcomes** from flywheel cycle 1, so the runner scores them PASS in agreement with
+`results/cycle-1.md`. Cases with no recorded run (PC-004, PC-006) stay `UNSCORED` — that is the honest
+state, not a gap to paper over.
+
+**Calibration (still open):** judge calibration (TPR/TNR ≥ 80%) is **not done and cannot be faked from
+what exists.** The available verdicts are agent-generated (the scaffold-audit instrument) — and the eval
+discipline forbids LLM-generated data as ground truth (calibrating one LLM judge with another's verdicts is
+circular). A real calibration set requires a human to hand-label a batch of (output → PASS/FAIL) judgments.
 
 ## Ground-truth discipline
 Cases are grounded in **observed** failures where possible (dormancy, stale handoffs, mis-routing). Some are

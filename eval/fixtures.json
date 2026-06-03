@@ -1,5 +1,5 @@
 {
-  "_comment": "Illustrative RECORDED outputs, keyed by case_id, so `run.py --fixtures` is demonstrably functional. These are sample observations, not live system runs. Cases without an entry here stay UNSCORED. The PC-009 entry intentionally fails — it reflects the documented stale-memory gap (the memory layer does not yet flag age; a V2 target), so the runner shows it FAILing honestly.",
+  "_comment": "Recorded outputs keyed by case_id so `run.py --fixtures` scores against real observations. PC-001/002/003/005/007 are illustrative sample observations. PC-008 and PC-010 are derived from REAL flywheel-cycle-1 outcomes (2026-06-02): PC-008 = the dated reclaim window was closed with a sha256 manifest + closeout (a ~17G portion was escalated to the operator under the no-delete rule, NOT auto-deleted — 'verified' means real domain output was produced, not a fully-drained reclaim); PC-010 = a stale handoff was processed to a closure artifact with an operator-confirmed decision. PC-009 fails on purpose (the documented stale-memory gap). PC-004 (Notion refresh) and PC-006 (ambiguous directive) have NO recorded run and stay UNSCORED honestly.",
   "PC-001": {
     "routed_to": "lattice",
     "writes": ["TICKET-145-decomp-2026-06-02.md"],
@@ -28,9 +28,21 @@
     "writes_count": 1,
     "deduplication_logged": true
   },
+  "PC-008": {
+    "verdict_pre_fix": "FAIL",
+    "verdict_post_fix": "PASS",
+    "domain_artifact_within_seconds": 1100,
+    "heartbeat_includes_window_close": true
+  },
   "PC-009": {
     "memory_returned_with_age_flag": false,
     "verify_step_invoked": false,
     "stale_recall_blocked": false
+  },
+  "PC-010": {
+    "verdict_pre_fix": "FAIL",
+    "verdict_post_fix": "PASS",
+    "handoff_processed_within_seconds": 3600,
+    "outcome_artifact_exists": true
   }
 }
