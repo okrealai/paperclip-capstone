@@ -12,7 +12,7 @@ decided_by: James Smith
 
 A platform-engineering role in the server org was renamed. The role's prior tree was quarantined to a dated archive directory, and canonical ownership of platform-engineering responsibilities moved to the newly named role's directory.
 
-Despite that migration, the retired role's inbox remained live and kept accumulating a sizable backlog of stale alerts spanning several weeks (platform-health categories such as network ports, source control, packages, and storage mounts). No consumer polled that inbox after the role was archived — the platform sweepers had been redirected to write to the new role's inbox, so detection responsibility had moved while the old routing target was left in place.
+Despite that migration, the retired role's inbox remained live and kept accumulating a sizable backlog of stale alerts spanning several weeks (various platform-health categories). No consumer polled that inbox after the role was archived — the platform sweepers had been redirected to write to the new role's inbox, so detection responsibility had moved while the old routing target was left in place.
 
 The orphan was surfaced by an internal audit finding during a scheduled security-lane activation sweep. The same review flagged the retired inbox as filing drift: alerts continued landing in a retired role's inbox while detection sovereignty had moved to the new role.
 

@@ -16,6 +16,10 @@ findings were selected as targets and closed by a roughly **36-agent orchestrati
 (managers + workers running in parallel). Constraints: internal org-tree edits only, **no external
 system writes**, and every case driven by an observed failure — no synthetic data.
 
+> **How these verdicts were obtained:** the case verdicts here were **observed via the org scaffold-audit
+> instrument**, not produced by running `eval/cases/*.json` through a scorer (no runner is committed yet —
+> see `eval/README.md` § Provenance). Ratios are rounded: 7/30 = 23.3%, 11/30 = 36.7%.
+
 ## After (re-audit)
 | Case | Mode | Verdict | Why |
 |---|---|---|---|

@@ -129,6 +129,15 @@ eval/
 
 ---
 
+## Status
+
+**Complete:** a verified executive core (11/30 managers), one measured flywheel cycle (23% → 37%), the eval
+harness (failure modes + 10 cases + judge rubric), two ADRs, and the architecture diagram. **Carries forward:**
+judge calibration, an eval runner/scorer, coverage of failure-mode 7, and the 19 remaining process-only
+managers. The next cycle starts from those items, not from zero — see `docs/flywheel-cycle-1.md`.
+
+---
+
 ## License
 
 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/) — Attribution, NonCommercial, NoDerivatives.

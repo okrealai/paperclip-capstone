@@ -14,7 +14,17 @@ audit→fix→re-audit cycle starts from named, reusable cases instead of from z
   few-shot / output format).
 - **`results/cycle-1.md`** — the before/after record for the first flywheel cycle (23% → 37%).
 
+## Provenance & status
+The headline **23% → 37%** improvement was measured by the org's **scaffold-audit instrument** (the same
+classifier described in the repo README), **not** by executing the JSON cases below. The `cases/PC-0NN.json`
+files **define** the harness; most ship as **unscored templates** (`actual` / `verdict` = `null`) — there is
+**no runner/scorer committed yet** (a roadmap item, see the repo "What is NOT built yet"). Where
+`results/cycle-1.md` cites PC-008 / PC-010 as FAIL → PASS, those verdicts were **observed via the audit
+instrument**, not produced by scoring the JSON.
+
 ## Ground-truth discipline
-Every case is driven by an **observed** failure, never synthetic data. Judge calibration
-(TPR/TNR thresholds against a human-labeled set) is **not yet shipped** — verdicts are advisory
-until then.
+Cases are grounded in **observed** failures where possible (dormancy, stale handoffs, mis-routing). Some are
+**preventive / negative tests** (malformed approval token, ambiguous directive, external-write gate) and are
+labeled as such rather than claimed as observed. **Coverage gap:** failure-mode **7** (alert routed to an
+archived destination) is *defined* but not yet *cased*. Judge calibration (TPR/TNR thresholds against a
+human-labeled set) is **not yet shipped** — verdicts are advisory until then.

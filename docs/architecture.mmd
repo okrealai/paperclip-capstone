@@ -36,12 +36,12 @@ flowchart TB
       CKO_FS[cko/filesystem-org]
       CKO_DOC[cko/document-standards]
       CIO_NPORTS[cio/network-ports]
-      CIO_SWEEPERS[cio sweepers x4]
+      CIO_SWEEPERS[cio sweepers]
       COO_CYCLE[coo/cycle]
       COO_SCHED[coo cron + service-health + backup]
       CEO_FRONT[ceo — Apex front]
       VERITAS[veritas — audit probes]
-      CISO_SEC[ciso/secrets-rotation]
+      CISO_SEC[ciso/secrets-rotation planned]
     end
     subgraph WORKERS["Worker pool"]
       direction TB

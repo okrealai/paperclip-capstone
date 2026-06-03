@@ -51,7 +51,7 @@ This is the body of the system. It has four parts: a router, the CXO managers, t
 - **cko/x-biz-consistency** — keeps standards consistent across the operator's businesses; destination for "x-biz consistency." *Verified.*
 - **cio/network-ports** — an infrastructure manager that watches for port-binding drift. *Verified.*
 
-Alongside the verified managers sit several that are scaffolded or DORMANT. Under the knowledge lane: **cko/cleanup-archival**, **cko/filesystem-org**, and **cko/document-standards**. Under the operations lane: **coo/cycle**. Under the executive lane: a **ceo — Apex front** and **veritas — audit probes** (the audit function). These carry the DORMANT marker — heartbeat present, domain output not yet flowing. Two operations managers, **cio sweepers (a set of four)** and **coo cron + service-health + backup**, are LIVE production routines. One security manager, **ciso/secrets-rotation**, is MISSING — proposed in the design, not yet built (drawn dashed).
+Alongside the verified managers sit several that are scaffolded or DORMANT. Under the knowledge lane: **cko/cleanup-archival**, **cko/filesystem-org**, and **cko/document-standards**. Under the operations lane: **coo/cycle**. Under the executive lane: a **ceo — Apex front** and **veritas — audit probes** (the audit function). These carry the DORMANT marker — heartbeat present, domain output not yet flowing. Two operations managers, **cio sweepers** and **coo cron + service-health + backup**, are LIVE production routines. One lane, **ciso/secrets-rotation**, is PLANNED — on the roadmap, proposed in the design but not yet built (drawn dashed).
 
 This split inside one subgraph is deliberate: the diagram does not pretend the whole fleet is working. The verified core is a minority of the managers, and the rest are shown honestly in their true state.
 
@@ -167,12 +167,12 @@ flowchart TB
       CKO_FS[cko/filesystem-org]
       CKO_DOC[cko/document-standards]
       CIO_NPORTS[cio/network-ports]
-      CIO_SWEEPERS[cio sweepers x4]
+      CIO_SWEEPERS[cio sweepers]
       COO_CYCLE[coo/cycle]
       COO_SCHED[coo cron + service-health + backup]
       CEO_FRONT[ceo — Apex front]
       VERITAS[veritas — audit probes]
-      CISO_SEC[ciso/secrets-rotation]
+      CISO_SEC[ciso/secrets-rotation planned]
     end
     subgraph WORKERS["Worker pool"]
       direction TB

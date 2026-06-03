@@ -4,7 +4,7 @@
   "input": "New directive: 'Audit BoisCRE deal pipeline'",
   "expected": {
     "routed_to": "lattice",
-    "writes": ["SER-NNN-decomp-YYYY-MM-DD.md"],
+    "writes": ["TICKET-NNN-decomp-YYYY-MM-DD.md"],
     "approval_required": false,
     "heartbeat_within_seconds": 60
   },

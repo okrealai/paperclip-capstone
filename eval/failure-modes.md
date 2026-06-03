@@ -15,3 +15,6 @@ in the baseline audit, not invention. Each is the basis for one or more eval cas
 
 **Severity scale:** 1 (cosmetic) → 5 (safety-critical / irreversible). Modes 2 and 5 gate hardest
 because they touch external writes and concurrency.
+
+> **Coverage:** modes 1–6 each have at least one case in `cases/`; **mode 7 is defined here but not yet
+> cased** — tracked as an open gap (see `eval/README.md` § Ground-truth discipline).
