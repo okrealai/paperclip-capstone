@@ -4,23 +4,39 @@ Evaluation is treated as **infrastructure, not a one-shot script**. The harness 
 audit→fix→re-audit cycle starts from named, reusable cases instead of from zero.
 
 ## Layout
-- **`failure-modes.md`** — the 7 observed failure modes (with severity), each grounded in a real
-  observation from the baseline audit.
+- **`run.py`** — the runner/scorer. Loads the cases, scores each against its `expected` block
+  (deterministic code checks first; optional `--judge` LLM pass for subjective cases), and writes
+  `results/latest.json`. Stdlib-only by default — no secrets, runs offline.
+- **`fixtures.json`** — illustrative *recorded* `actual` outputs keyed by `case_id`, so the runner is
+  demonstrably functional without touching the live system.
+- **`failure-modes.md`** — the 7 failure modes (with severity), grounded in the baseline audit.
 - **`cases/PC-0NN.json`** — 10 cases mapping to those failure modes. Each declares `input`,
-  `expected` behavior, and is scored `actual` / `verdict` at run time. Cases cover routing,
+  `expected` behavior, and `actual` / `verdict` (scored by `run.py`). Cases cover routing,
   gated external writes (incl. a malformed-token negative case), dormancy, stale memory recall,
   concurrency dedup, and stale-handoff processing.
 - **`judge/rubric.md`** — the 5-component LLM-judge prompt (Role / Accept rubric / Reject rubric /
   few-shot / output format).
-- **`results/cycle-1.md`** — the before/after record for the first flywheel cycle (23% → 37%).
+- **`results/latest.json`** — last runner output. **`results/cycle-1.md`** — the before/after record
+  for the first flywheel cycle (23% → 37%).
+
+## Running it
+```bash
+python eval/run.py                              # score; unscored where no recorded output
+python eval/run.py --fixtures eval/fixtures.json # score against recorded outputs
+python eval/run.py --fixtures eval/fixtures.json --judge   # + LLM judge (needs ANTHROPIC_API_KEY)
+```
+With the shipped fixtures this currently yields **5 PASS / 1 FAIL / 4 UNSCORED** (pass rate 83% of
+scored). The one FAIL is PC-009 — it reflects the real, documented stale-memory gap (the memory layer
+does not yet flag age), so the runner reports it FAILing honestly rather than hiding it.
 
 ## Provenance & status
 The headline **23% → 37%** improvement was measured by the org's **scaffold-audit instrument** (the same
 classifier described in the repo README), **not** by executing the JSON cases below. The `cases/PC-0NN.json`
-files **define** the harness; most ship as **unscored templates** (`actual` / `verdict` = `null`) — there is
-**no runner/scorer committed yet** (a roadmap item, see the repo "What is NOT built yet"). Where
-`results/cycle-1.md` cites PC-008 / PC-010 as FAIL → PASS, those verdicts were **observed via the audit
-instrument**, not produced by scoring the JSON.
+files **define** the harness; they ship as **unscored templates** (`actual` / `verdict` = `null`), and
+`run.py` scores them against recorded outputs (see `fixtures.json`). Where `results/cycle-1.md` cites
+PC-008 / PC-010 as FAIL → PASS, those verdicts were **observed via the audit instrument**, not produced by
+scoring the JSON — the runner reports them `UNSCORED` until a recorded output exists, which is the honest
+state.
 
 ## Ground-truth discipline
 Cases are grounded in **observed** failures where possible (dormancy, stale handoffs, mis-routing). Some are

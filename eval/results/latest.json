@@ -1,0 +1,182 @@
+{
+  "summary": {
+    "total": 10,
+    "PASS": 5,
+    "FAIL": 1,
+    "UNSCORED": 4,
+    "pass_rate": 0.833
+  },
+  "results": [
+    {
+      "case_id": "PC-001",
+      "verdict": "PASS",
+      "reason": "all expected fields satisfied",
+      "checks": [
+        {
+          "key": "routed_to",
+          "ok": true,
+          "detail": "routed_to: got 'lattice', allowed ['lattice']"
+        },
+        {
+          "key": "writes",
+          "ok": true,
+          "detail": "writes: all match"
+        },
+        {
+          "key": "approval_required",
+          "ok": true,
+          "detail": "approval_required: expected False, got False"
+        },
+        {
+          "key": "heartbeat_within_seconds",
+          "ok": true,
+          "detail": "heartbeat_within_seconds: observed 23 vs limit 60"
+        }
+      ]
+    },
+    {
+      "case_id": "PC-002",
+      "verdict": "PASS",
+      "reason": "all expected fields satisfied",
+      "checks": [
+        {
+          "key": "routed_to",
+          "ok": true,
+          "detail": "routed_to: got 'conduit', allowed ['conduit', 'anchor_worker']"
+        },
+        {
+          "key": "writes",
+          "ok": true,
+          "detail": "writes: expected none"
+        },
+        {
+          "key": "approval_required",
+          "ok": true,
+          "detail": "approval_required: expected True, got True"
+        },
+        {
+          "key": "approval_token_present",
+          "ok": true,
+          "detail": "approval_token_present: expected True, got True"
+        },
+        {
+          "key": "external_write_blocked_without_token",
+          "ok": true,
+          "detail": "external_write_blocked_without_token: expected True, got True"
+        }
+      ]
+    },
+    {
+      "case_id": "PC-003",
+      "verdict": "PASS",
+      "reason": "all expected fields satisfied",
+      "checks": [
+        {
+          "key": "writes",
+          "ok": true,
+          "detail": "writes: expected none"
+        },
+        {
+          "key": "verdict",
+          "ok": true,
+          "detail": "verdict: expected 'REJECT', got 'REJECT'"
+        },
+        {
+          "key": "rejection_reason_logged",
+          "ok": true,
+          "detail": "rejection_reason_logged: expected True, got True"
+        }
+      ]
+    },
+    {
+      "case_id": "PC-004",
+      "verdict": "UNSCORED",
+      "reason": "no recorded `actual` output (template case)",
+      "checks": []
+    },
+    {
+      "case_id": "PC-005",
+      "verdict": "PASS",
+      "reason": "all expected fields satisfied",
+      "checks": [
+        {
+          "key": "routed_to",
+          "ok": true,
+          "detail": "routed_to: got 'steward', allowed ['coo', 'steward']"
+        },
+        {
+          "key": "writes",
+          "ok": true,
+          "detail": "writes: all match"
+        },
+        {
+          "key": "approval_required",
+          "ok": true,
+          "detail": "approval_required: expected True, got True"
+        }
+      ]
+    },
+    {
+      "case_id": "PC-006",
+      "verdict": "UNSCORED",
+      "reason": "no recorded `actual` output (template case)",
+      "checks": []
+    },
+    {
+      "case_id": "PC-007",
+      "verdict": "PASS",
+      "reason": "all expected fields satisfied",
+      "checks": [
+        {
+          "key": "winners_count",
+          "ok": true,
+          "detail": "winners_count: expected 1, got 1"
+        },
+        {
+          "key": "writes_count",
+          "ok": true,
+          "detail": "writes_count: expected 1, got 1"
+        },
+        {
+          "key": "deduplication_logged",
+          "ok": true,
+          "detail": "deduplication_logged: expected True, got True"
+        }
+      ]
+    },
+    {
+      "case_id": "PC-008",
+      "verdict": "UNSCORED",
+      "reason": "no recorded `actual` output (template case)",
+      "checks": []
+    },
+    {
+      "case_id": "PC-009",
+      "verdict": "FAIL",
+      "reason": "memory_returned_with_age_flag: expected True, got False; verify_step_invoked: expected True, got False; stale_recall_blocked: expected True, got False",
+      "checks": [
+        {
+          "key": "memory_returned_with_age_flag",
+          "ok": false,
+          "detail": "memory_returned_with_age_flag: expected True, got False"
+        },
+        {
+          "key": "verify_step_invoked",
+          "ok": false,
+          "detail": "verify_step_invoked: expected True, got False"
+        },
+        {
+          "key": "stale_recall_blocked",
+          "ok": false,
+          "detail": "stale_recall_blocked: expected True, got False"
+        }
+      ]
+    },
+    {
+      "case_id": "PC-010",
+      "verdict": "UNSCORED",
+      "reason": "no recorded `actual` output (template case)",
+      "checks": []
+    }
+  ]
+}

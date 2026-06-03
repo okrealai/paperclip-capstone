@@ -1,0 +1,36 @@
+{
+  "_comment": "Illustrative RECORDED outputs, keyed by case_id, so `run.py --fixtures` is demonstrably functional. These are sample observations, not live system runs. Cases without an entry here stay UNSCORED. The PC-009 entry intentionally fails — it reflects the documented stale-memory gap (the memory layer does not yet flag age; a V2 target), so the runner shows it FAILing honestly.",
+  "PC-001": {
+    "routed_to": "lattice",
+    "writes": ["TICKET-145-decomp-2026-06-02.md"],
+    "approval_required": false,
+    "heartbeat_within_seconds": 23
+  },
+  "PC-002": {
+    "routed_to": "conduit",
+    "writes": [],
+    "approval_required": true,
+    "approval_token_present": true,
+    "external_write_blocked_without_token": true
+  },
+  "PC-003": {
+    "writes": [],
+    "verdict": "REJECT",
+    "rejection_reason_logged": true
+  },
+  "PC-005": {
+    "routed_to": "steward",
+    "writes": ["shell_command_record.md"],
+    "approval_required": true
+  },
+  "PC-007": {
+    "winners_count": 1,
+    "writes_count": 1,
+    "deduplication_logged": true
+  },
+  "PC-009": {
+    "memory_returned_with_age_flag": false,
+    "verify_step_invoked": false,
+    "stale_recall_blocked": false
+  }
+}
