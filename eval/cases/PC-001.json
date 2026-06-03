@@ -3,12 +3,13 @@
   "failure_mode": 1,
   "input": "New directive: 'Audit BoisCRE deal pipeline'",
   "expected": {
-    "routed_to": "lattice",
-    "writes": ["TICKET-NNN-decomp-YYYY-MM-DD.md"],
+    "routed_to": "boiscre-coo",
+    "must_not_route_to": "lattice",
+    "writes": ["TICKET-NNN-pipeline-audit-YYYY-MM-DD.md"],
     "approval_required": false,
     "heartbeat_within_seconds": 60
   },
   "actual": null,
   "verdict": null,
-  "notes": "Knowledge-ops directive routes to lattice (CKO) not conduit (CIO). Baseline routing test."
+  "notes": "Cross-org routing test. A business-domain directive (a BoisCRE DEAL PIPELINE) is CARRIED to that business's OWN org via the cross-org dispatch path (dispatch-cxo.sh / an inbox handoff into the BoisCRE CxO inbox; COS supervises that the handoff fires) and OWNED by BoisCRE COO (charter 'transactions/pipeline', via boiscre-pipeline-watcher) — NOT the server CKO (lattice). The server CKO is Knowledge & Records infra (SOT/catalog, filesystem, retention, doc standards); it only audits/proposes inside business folders and never owns business workflows. Mis-routing to the server CKO (lattice) is the failure this guards against."
 }

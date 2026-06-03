@@ -60,6 +60,9 @@ def _check_key(key: str, exp, actual: dict) -> tuple[bool, str]:
         allowed = str(exp).split("_or_")
         got = actual.get("routed_to")
         return (got in allowed, f"routed_to: got '{got}', allowed {allowed}")
+    if key == "must_not_route_to":
+        got = actual.get("routed_to")
+        return (got != exp, f"must_not_route_to: routed_to='{got}' must NOT be '{exp}'")
     if key == "writes":
         return _check_writes(exp, actual.get("writes", []))
     if key.endswith("_within_seconds"):

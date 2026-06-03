@@ -1,8 +1,8 @@
 {
   "_comment": "Recorded outputs keyed by case_id so `run.py --fixtures` scores against real observations. PC-001/002/003/005/007 are illustrative sample observations. PC-008 and PC-010 are derived from REAL flywheel-cycle-1 outcomes (2026-06-02): PC-008 = the dated reclaim window was closed with a sha256 manifest + closeout (a ~17G portion was escalated to the operator under the no-delete rule, NOT auto-deleted — 'verified' means real domain output was produced, not a fully-drained reclaim); PC-010 = a stale handoff was processed to a closure artifact with an operator-confirmed decision. PC-009 fails on purpose (the documented stale-memory gap). PC-004 (Notion refresh) and PC-006 (ambiguous directive) have NO recorded run and stay UNSCORED honestly.",
   "PC-001": {
-    "routed_to": "lattice",
-    "writes": ["TICKET-145-decomp-2026-06-02.md"],
+    "routed_to": "boiscre-coo",
+    "writes": ["TICKET-145-pipeline-audit-2026-06-02.md"],
     "approval_required": false,
     "heartbeat_within_seconds": 23
   },

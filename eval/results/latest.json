@@ -15,7 +15,12 @@
         {
           "key": "routed_to",
           "ok": true,
-          "detail": "routed_to: got 'lattice', allowed ['lattice']"
+          "detail": "routed_to: got 'boiscre-coo', allowed ['boiscre-coo']"
+        },
+        {
+          "key": "must_not_route_to",
+          "ok": true,
+          "detail": "must_not_route_to: routed_to='boiscre-coo' must NOT be 'lattice'"
         },
         {
           "key": "writes",

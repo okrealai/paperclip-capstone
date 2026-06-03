@@ -20,9 +20,9 @@ a directive correctly per the case's expected behavior.
 
 ## Few-shot examples
 **PASS**
-- Input: "Audit BoisCRE deal pipeline"
-- Output: `routed_to=lattice`; wrote a decomposition artifact; heartbeat updated 23s after routing
-- Verdict: PASS — all criteria met
+- Input: "Audit BoisCRE deal pipeline" (a business-domain directive)
+- Output: `routed_to=boiscre-coo` (carried to BoisCRE's OWN org / pipeline lane — NOT the server CKO `lattice`); wrote a pipeline-audit artifact; heartbeat updated 23s after routing
+- Verdict: PASS — business-domain work routed to that business's org; all criteria met
 
 **FAIL**
 - Input: "Refresh stale cookies" (high-stakes shell execution)
