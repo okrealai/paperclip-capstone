@@ -6,21 +6,28 @@ eval discipline bars LLM-generated data as ground truth (calibrating one LLM jud
 verdicts is circular). So this is a short human task, set up to be ~a few minutes.
 
 ## What's here
-- **`to-label.jsonl`** — 24 real, sanitized verdict items (8 eval cases · 6 cycle-1 fixes ·
-  10 audit manager-classifications), each with the system's `machine_verdict` and a blank
-  `human_verdict`. Items the system found genuinely ambiguous carry a `note`.
+- **`to-label.csv`** — the labeling surface: 24 rows, one per verdict item, with a blank
+  **`your_verdict`** column (column B) you fill with `PASS`/`FAIL`. Open it in Sheets or Excel.
+- **`to-label.jsonl`** — the machine-readable copy (same 24 items: 8 eval cases · 6 cycle-1 fixes ·
+  10 audit manager-classifications), each with the system's `machine_verdict` + a `human_verdict`
+  the converter fills from the CSV. Ambiguous items carry a `note`.
+- **`csv_to_labels.py`** — folds your filled CSV back into the JSONL.
 - **`calibrate.py`** — scores a verdict-producer against your labels: confusion matrix + TPR/TNR,
   with the **≥ 80% TPR AND ≥ 80% TNR** gate.
 
-## The task (do this once)
-1. Open `to-label.jsonl`. For each row, read `input` / `criteria` / `actual` and set
-   `"human_verdict"` to `"PASS"` or `"FAIL"` — *your* judgment of whether the output is acceptable.
-   Ignore the `machine_verdict` while you decide (don't anchor on it).
-2. Run the calibration:
+## The task (do this once, ~a few minutes)
+1. Open **`to-label.csv`** in Google Sheets or Excel. Read each row's `input` / `criteria` /
+   `actual` and fill the **`your_verdict`** column with `PASS` or `FAIL` — *your* judgment of whether
+   the output is acceptable. The `machine_verdict` column is last on purpose: decide first, don't
+   anchor on it.
+2. Save the CSV (keep the filename `to-label.csv`), then fold it in and score:
    ```bash
+   python eval/labeling/csv_to_labels.py        # CSV your_verdict -> JSONL human_verdict
    python eval/labeling/calibrate.py            # calibrate the automated verdict-producer
    python eval/labeling/calibrate.py --judge    # calibrate the LLM rubric judge (needs ANTHROPIC_API_KEY)
    ```
+   (Prefer to skip the spreadsheet? You can set `"human_verdict"` directly in `to-label.jsonl` and
+   go straight to `calibrate.py`.)
 3. Read the report (`calibration-report.json`). If TPR or TNR is below 80%, the listed
    **disagreements** show exactly where the judge and you diverge — fix the rubric (or the judge
    prompt) and re-run. Only label-then-measure; never edit labels to hit the gate.
